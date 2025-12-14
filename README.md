@@ -1,4 +1,4 @@
-# Automation Agent – WhatsApp AI Assistant
+# Automation Agent 
 
 Automation Agent is an AI-powered assistant that works entirely through WhatsApp, allowing users to manage emails and automate basic tasks using natural language.
 
