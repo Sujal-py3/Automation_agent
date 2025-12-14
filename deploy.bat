@@ -1,0 +1,9 @@
+@echo off
+echo Building NestJS application...
+call npm run build
+
+echo Installing dependencies...
+call npm install
+
+echo Starting server...
+call npm run serve:static 

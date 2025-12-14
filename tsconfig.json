@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ES6",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true
+    },
+      "exclude": [
+        "node_modules",
+        "dist",
+        "frontend" 
+      ]
+    }
+
+  

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALF.RED - WhatsApp Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+        input[type="tel"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .error {
+            color: #dc3545;
+            margin-top: 10px;
+            display: none;
+        }
+        .success {
+            color: #28a745;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Connect Your WhatsApp</h1>
+        <p>To use ALF.RED with WhatsApp, please follow these steps:</p>
+        <ol>
+            <li>Enter your WhatsApp number below (with country code, e.g., +1234567890)</li>
+            <li>Click "Connect Google Account"</li>
+            <li>Sign in with your Google account</li>
+            <li>Grant the necessary permissions</li>
+        </ol>
+        
+        <div class="form-group">
+            <label for="whatsapp">WhatsApp Number:</label>
+            <input type="tel" id="whatsapp" placeholder="+1234567890" pattern="\+[1-9]\d{1,14}">
+        </div>
+        
+        <button onclick="connectGoogle()">Connect Google Account</button>
+        
+        <div id="error" class="error"></div>
+        <div id="success" class="success"></div>
+    </div>
+
+    <script>
+        // Get API URL from environment or use default
+        const API_URL = window.API_URL || 'http://localhost:8000';
+
+        function connectGoogle() {
+            const whatsappInput = document.getElementById('whatsapp');
+            const errorDiv = document.getElementById('error');
+            const successDiv = document.getElementById('success');
+            
+            // Reset messages
+            errorDiv.style.display = 'none';
+            successDiv.style.display = 'none';
+            
+            // Validate WhatsApp number
+            const whatsappNumber = whatsappInput.value.trim();
+            if (!whatsappNumber.match(/^\+[1-9]\d{1,14}$/)) {
+                errorDiv.textContent = 'Please enter a valid WhatsApp number with country code (e.g., +1234567890)';
+                errorDiv.style.display = 'block';
+                return;
+            }
+            
+            // Redirect to Google OAuth with WhatsApp number
+            const authUrl = `${API_URL}/auth/login?whatsapp=${encodeURIComponent(whatsappNumber)}`;
+            window.location.href = authUrl;
+        }
+    </script>
+</body>
+</html> 
